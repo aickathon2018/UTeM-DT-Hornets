@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load static %}
+<html> 
+<head>
+<meta charset="ISO-8859-1">
+<link href="{% static 'fashionClassifier/style.css' %}" type="text/css" rel="stylesheet" />
+<title>{% block title %}Fashion Classifier{% endblock %}</title>
+</head>
+<body>
+	<div class = "content">
+	{%block content %}
+	<p>Please provide your folder path</p>
+	<form action = "{% url 'fashionClassifier:classify' %}" method = "post">
+		{%csrf_token %}
+		<label>Folder Path: <br />
+		<input type = "text" name = "filepath" required/></label><br />
+		<label>
+		<br />
+			<input onclick = "loadScreen()" type = "submit" value = "Classify Pictures" />
+		</label> 
+	</form>	
+	{%endblock%}
+	{% if error %}<p>{{error}}</p>{% endif %}
+	</div>
+	<div id="loadpage" style="position:absolute; 
+    left:0px; top:0px; background-color:white; 
+    layer-background-color:white; height:100%; 
+    width:100%; display : none"> 
+      <p align="center" style="font-size: large;">
+        <img src= "{% static '/gallery/loading.gif' %}">
+        <B>Processing Your Data</B>
+      </p>
+</div>
+	<footer>
+	</footer>
+	<script type="text/javascript">
+	function loadScreen(){
+		document.getElementById("loadpage").style.display = 'block';
+	}
+	</script>
+</body>
+</html>

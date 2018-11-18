@@ -1,0 +1,18 @@
+{% extends 'fashionClassifier/index.html' %}
+
+{% block content %}
+
+<p>The result is : </p>
+<p>Child favourite garment is : {{fChild}}</p>
+<p>Teen favourite garment is : {{fTeen}}</p>
+<p>Adult favourite garment is : {{fAdult}}</p>
+
+<form action = "{% url 'fashionClassifier:index' %}" method = "post">
+	{% csrf_token %}
+		<label>
+		<br />
+			<input type = "submit" value = "Again" />
+		</label> 
+	</form>	
+
+{% endblock %}
